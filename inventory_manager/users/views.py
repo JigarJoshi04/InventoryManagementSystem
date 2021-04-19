@@ -15,7 +15,7 @@ import json
 
 
 @csrf_exempt
-def create_new_user(request):
+def create_user(request):
 
     if request.method == "POST":
         body_unicode = request.body.decode("utf-8")
