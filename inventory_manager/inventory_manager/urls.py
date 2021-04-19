@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', obtain_auth_token, name='token_obtain_pair'),
     path('users/', include('users.urls')),
-    path('equipments/', include('equipments.urls'))
+    path('equipments/', include('equipments.urls')),
+    path('transactions/', include('transactions.urls')),
 ]

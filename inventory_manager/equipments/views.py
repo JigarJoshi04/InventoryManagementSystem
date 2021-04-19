@@ -20,7 +20,6 @@ from users.models import UserModel
 def create_equipment(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
-    equipment_id = body["equipment_id"]
     equipment_name = body["equipment_name"]
     is_available= bool(body["is_available"])
     
@@ -28,6 +27,18 @@ def create_equipment(request):
     user_who_added_equipment = UserModel.objects.get(phone_number= user_phone_number)  
     added_by_user = user_who_added_equipment
     
-    equipment= EquipmentModel(equipment_id=equipment_id, equipment_name=equipment_name, is_available=is_available,added_by_user = added_by_user)
+    equipment= EquipmentModel(equipment_name=equipment_name, is_available=is_available,added_by_user = added_by_user)
     equipment.save()
     return HttpResponse("Equipment addition successful")
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def available_equipment(request):
+    equipments = EquipmentModel.objects.filter(is_available=True)
+    print(equipments)
+    d= {}
+    for equipment in equipments:
+        d[equipment.equipment_id] = equipment.equipment_name
+    print(d)
+    return  JsonResponse(d)
