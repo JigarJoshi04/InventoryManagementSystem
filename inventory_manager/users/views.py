@@ -55,11 +55,8 @@ def create_user(request):
 @csrf_exempt
 def login_user(request):
     if request.method == "POST":
-        print(request.body)
         body_unicode = request.body.decode("utf-8")
-        print(request.body)
         body = json.loads(body_unicode)
-        print(body)
         phone_number = body["phone_number"]
         password = body["password"]
 

@@ -42,3 +42,37 @@ def available_equipment(request):
         d[equipment.equipment_id] = equipment.equipment_name
     print(d)
     return  JsonResponse(d)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def all_equipment(request):
+    user_phone_number = Token.objects.get(key=str(request.headers["Authorization"])[6:]).user
+    user = UserModel.objects.get(phone_number= user_phone_number) 
+
+    if user.is_manager:
+        equipments = EquipmentModel.objects.all()
+        print(equipments)
+        d= {}
+        for equipment in equipments:
+            d[equipment.equipment_id] = equipment.equipment_name
+        print(d)
+        return  JsonResponse(d)
+    else:
+        return HttpResponse("Please ask your manager for this list of equipments")
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def issued_equipment(request):
+    user_phone_number = Token.objects.get(key=str(request.headers["Authorization"])[6:]).user
+    user = UserModel.objects.get(phone_number= user_phone_number) 
+
+    if user.is_manager:
+        equipments = EquipmentModel.objects.filter(is_available=False)
+        print(equipments)
+        d= {}
+        for equipment in equipments:
+            d[equipment.equipment_id] = equipment.equipment_name
+        print(d)
+        return  JsonResponse(d)
+    else:
+        return HttpResponse("Please ask your manager for this list of equipments")
