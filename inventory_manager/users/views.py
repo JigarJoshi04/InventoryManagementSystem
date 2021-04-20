@@ -25,7 +25,10 @@ def create_user(request):
         last_name = body["last_name"]
         email = body["email"]
         phone_number = body["phone_number"]
-        is_manager= bool(body["is_manager"])
+        if body["is_manager"] == "False":
+            is_manager= False
+        else:
+            is_manager = True
         str_password = body["password"]
         password = make_password(str_password)
         user = UserModel(
