@@ -80,11 +80,11 @@ def get_issuebook(request):
         logs = IssueBookModel.objects.all()
    
     else:
-        return HttpResponse("You are not permitetd to view this")
+        logs = IssueBookModel.objects.filter(requested_by_user=user_demanding_requests)
     
     d= {}
     for log in logs:
-        d[log.issue_id] =  [log.equipment.equipment_name, log.requested_by_user.first_name + " " + log.requested_by_user.last_name, log.actioned_by.first_name+ " "+ log.actioned_by.last_name]
+        d[log.issue_id] =  [str(log.equipment.equipment_id) + "--> " +log.equipment.equipment_name, log.requested_by_user.first_name + " " + log.requested_by_user.last_name, log.actioned_by.first_name+ " "+ log.actioned_by.last_name]
     
     return JsonResponse(d)
 
@@ -130,3 +130,26 @@ def action_request(request):
         
     else:
         return HttpResponse("Please contact manager to take action")
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def return_equipment(request):
+    user_phone_number = Token.objects.get(key=str(request.headers["Authorization"])[6:]).user
+    returning_user = UserModel.objects.get(phone_number= user_phone_number) 
+    
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    issue_id = body["issue_id"]
+    equipemnt_id = body["equipment_id"]
+
+
+    issuebook = IssueBookModel.objects.get(issue_id=issue_id)
+
+    if issuebook.requested_by_user == returning_user:
+        IssueBookModel.objects.get(issue_id=issue_id).delete()
+        EquipmentModel.objects.filter(equipment_id = equipemnt_id).update(is_available=True)
+        return HttpResponse("Equipment has been returned successfully")
+
+    
+    else:
+        return HttpResponse("Invalid request. Please contact manager for further aassistance")
