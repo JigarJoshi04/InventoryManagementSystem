@@ -1,0 +1,303 @@
+{
+  "info": {
+    "_postman_id": "76a3d5fb-08b7-4609-a65f-cb3854e1382d",
+    "name": "InventoryManagementSystem",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CreateUser",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"first_name\": \"test_user\",\n    \"last_name\": \"001\",\n    \"email\": \"test001@gmail.com\",\n    \"phone_number\": \"1111111111\",\n    \"is_manager\": \"False\",\n    \"password\": \"test001\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/users/create_user",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["users", "create_user"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LoginUser",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"phone_number\": \"admin\",\n    \"password\": \"admin\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/users/login_user",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["users", "login_user"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateEquipment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"equipment_name\": \"Monitor\",\n    \"is_available\":\"True\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/equipments/create_equipment",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["equipments", "create_equipment"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActionRequest",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"request_id\":\"3\",\n    \"is_granted\":\"False\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/action_request",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["transactions", "action_request"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateRequest",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"equipment_id\": \"3\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/create_request",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["transactions", "create_request"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ReturnEquipment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"equipment_id\": \"3\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/create_request",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["transactions", "create_request"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AvailableEquipment",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/equipments/available_equipment",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["equipments", "available_equipment"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AllEquipment",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/equipments/all_equipment",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["equipments", "all_equipment"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "IssuedEquipment",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/equipments/issued_equipment",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["equipments", "issued_equipment"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetRequests",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 4de1ef221bbc8a6f0dcfdedf3a3701ca73fa46de",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/get_requests",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["transactions", "get_requests"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetLogs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 4de1ef221bbc8a6f0dcfdedf3a3701ca73fa46de",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/get_logs",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["transactions", "get_logs"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetIssueBook",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token 06c2dfec99e8d0d48bd7ed8ec10379e512a401bd",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/get_issuebook",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["transactions", "get_issuebook"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
